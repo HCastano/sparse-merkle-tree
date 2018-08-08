@@ -143,7 +143,7 @@ impl SmtBuilder {
 
 struct SmtProver;
 impl SmtProver {
-    fn proof(slot: u64, nodes: &Vec<HashMap<u64, H256>>) -> SmtProof {
+    fn proof(slot: u64, nodes: &[HashMap<u64, H256>]) -> SmtProof {
         let depth = 64;
 
         let mut is_default_bits = 0;
@@ -168,8 +168,8 @@ impl SmtProver {
 
     fn proof_root(
         slot: u64,
-        nodes: &Vec<HashMap<u64, H256>>,
-        default_hashes: &Vec<H256>,
+        nodes: &[HashMap<u64, H256>],
+        default_hashes: &[H256],
         proof: SmtProof,
     ) -> H256 {
         if nodes[0].get(&slot).is_none() {
