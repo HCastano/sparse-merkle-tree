@@ -126,7 +126,7 @@ impl SmtBuilder {
             Some(parent_hash)
         } else {
             let sibling_slot = slot - 1;
-            if let None = level_nodes.get(&sibling_slot) {
+            if level_nodes.get(&sibling_slot).is_none() {
                 let mut input = vec![];
                 input.extend(&level_default_hash[..]);
                 input.extend(&node[..]);
