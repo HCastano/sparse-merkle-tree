@@ -65,9 +65,10 @@ impl SmtBuilder {
         for curr_level in 0..depth {
             let mut parent_nodes = HashMap::new();
             for (slot, node) in curr_nodes.iter() {
-                let parent = Self::parent_node(slot, node, &curr_nodes, default_hashes[curr_level]);
+                let parent =
+                    Self::parent_node(*slot, node, &curr_nodes, default_hashes[curr_level]);
                 if let Some(parent_hash) = parent {
-                    parent_nodes.insert(slot / 2, parent_hash);
+                    parent_nodes.insert(*slot / 2, parent_hash);
                 }
             }
             nodes.push(parent_nodes.clone());
@@ -101,7 +102,7 @@ impl SmtBuilder {
     /// Level_nodes are all the nodes at the same level as the given node.
     /// Levl_default_hash is the default hash to use a this level.
     fn parent_node(
-        slot: &u64,
+        slot: u64,
         node: &H256,
         level_nodes: &HashMap<u64, H256>,
         level_default_hash: H256,
