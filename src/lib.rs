@@ -54,6 +54,7 @@ pub trait LeafItem {
     fn hash(&self) -> H256;
 }
 
+
 struct SmtBuilder;
 impl SmtBuilder {
     fn tree(leaves: HashMap<u64, H256>) -> SparseMerkleTree {
@@ -64,7 +65,7 @@ impl SmtBuilder {
         let mut curr_nodes = leaves;
         for curr_level in 0..depth {
             let mut parent_nodes = HashMap::new();
-            for (slot, node) in curr_nodes.iter() {
+            for (slot, node) in &curr_nodes {
                 let parent =
                     Self::parent_node(*slot, node, &curr_nodes, default_hashes[curr_level]);
                 if let Some(parent_hash) = parent {
