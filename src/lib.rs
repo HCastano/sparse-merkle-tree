@@ -183,7 +183,7 @@ impl SmtProver {
         let mut proof_index = 0;
 
         let mut curr_slot = slot;
-        let mut root_builder = *nodes[0].get(&slot).unwrap();
+        let mut root_builder = nodes[0][&slot];
         for curr_level in 0..depth {
             let sibling_hash = if proof_bits % 2 == 0 {
                 &default_hashes[curr_level][..]
