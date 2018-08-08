@@ -27,13 +27,13 @@ impl SparseMerkleTree {
         SmtBuilder::tree(leaves)
     }
 
-    pub fn proof(&self, leaf_item: impl LeafItem) -> SmtProof {
+    pub fn proof(&self, leaf_item: &impl LeafItem) -> SmtProof {
         SmtProver::proof(leaf_item.slot(), &self.nodes)
     }
 
     /// Returns true if the given leaf item is part of this merkle tree,
     /// using proof to reconstruct the root.
-    pub fn verify(&self, leaf_item: impl LeafItem, proof: SmtProof) -> bool {
+    pub fn verify(&self, leaf_item: &impl LeafItem, proof: SmtProof) -> bool {
         let proof_root =
             SmtProver::proof_root(leaf_item.slot(), &self.nodes, &self.default_hashes, proof);
         proof_root == self.root()
