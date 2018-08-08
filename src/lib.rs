@@ -41,8 +41,8 @@ impl SparseMerkleTree {
 
     pub fn root(&self) -> H256 {
         match self.nodes[self.depth].get(&0) {
-            Some(root) => root.clone(),
-            None => self.default_hashes[self.depth].clone(),
+            Some(root) => *root,
+            None => self.default_hashes[self.depth],
         }
     }
 }
